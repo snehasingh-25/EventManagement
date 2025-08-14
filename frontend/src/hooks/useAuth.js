@@ -30,10 +30,7 @@ export const useAuth = () => {
   };
 
   const getEvents = async () => {
-    const token = localStorage.getItem("token");
-    const res = await axios.get(`${API_URL}/events`, {
-      headers: { token }
-    });
+    const res = await axios.get(`${API_URL}/events`);
     return res.data;
   };
 

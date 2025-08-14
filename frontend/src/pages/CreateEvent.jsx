@@ -21,7 +21,8 @@ const CreateEvent = () => {
   return (
     <div className="form-container">
       <h2>Create Event</h2>
-      <form onSubmit={handleSubmit} className="form">
+      <div className="create-event-form">
+      <form onSubmit={handleSubmit} className="create-event-form">
         <input className="form-input" placeholder="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
         <textarea className="form-input" placeholder="Description" value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })}></textarea>
         <input className="form-input" placeholder="Image URL" value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} />
@@ -32,6 +33,7 @@ const CreateEvent = () => {
           {loading ? "Creating..." : "Create Event"}
         </button>
       </form>
+      </div>
     </div>
   );
 };

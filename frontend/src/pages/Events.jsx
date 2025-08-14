@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth.js";
-import CreateEvent from "./CreateEvent.jsx";
+import CardWrapper from "../components/Card.jsx";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
 
 const Events = () => {
   const { getEvents } = useAuth();
@@ -14,21 +18,46 @@ const Events = () => {
   }, []);
 
   return (
-    <div className="events-container">
-        <CreateEvent />
-      <h2>All Events</h2>
-      <div className="events-list">
-        {events.map((event) => (
-          <div key={event._id} className="event-card">
-            <h3>{event.title}</h3>
-            {event.image && <img src={event.image} alt={event.title} className="event-image" />}
-            <p>{event.description}</p>
-            <p><strong>Venue:</strong> {event.venue}</p>
-            <p><strong>Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
-            <p><strong>Time:</strong> {event.time}</p>
-          </div>
-        ))}
-      </div>
+    <div
+      className="events-container"
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        gap: "20px",
+        marginTop: "20px",
+      }}
+    >
+      {events.map((event) => (
+        <CardWrapper
+          key={event._id}
+          title={event.title}
+          subheader={new Date(event.date).toLocaleDateString()}
+          image={event.image}
+          children={
+            <>
+              <Typography sx={{ marginBottom: 1 }}>{event.description}</Typography>
+              <Typography sx={{ marginBottom: 1 }}>
+                <strong>Venue:</strong> {event.venue}
+              </Typography>
+              <Typography sx={{ marginBottom: 1 }}>
+                <strong>Time:</strong> {event.time}
+              </Typography>
+            </>
+          }
+          actions={
+            <>
+              <IconButton aria-label="favorite">
+                <FavoriteIcon />
+              </IconButton>
+              <IconButton aria-label="share">
+                <ShareIcon />
+              </IconButton>
+            </>
+          }
+          expandable={true}
+        />
+      ))}
     </div>
   );
 };

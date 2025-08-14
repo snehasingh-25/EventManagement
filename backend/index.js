@@ -69,6 +69,16 @@ app.post('/api/signin', async (req, res) => {
     res.json({ token });
 
 })
+
+app.get('/api/events', async (req, res) => {
+    try {
+        const events = await EventsModel.find().populate('userId', 'name email -_id');
+        res.json(events);
+    } catch (err) {
+        res.status(500).json({ message: "Error fetching events" });
+    }
+});
+
 app.use(authMiddleware);
 
 app.get('/api/profile', async (req, res) => {
@@ -99,14 +109,7 @@ app.post('/api/createevent', async (req, res) => {
     })
 })
 
-app.get('/api/events', async (req, res) => {
-    try {
-        const events = await EventsModel.find().populate('userId', 'name email -_id');
-        res.json(events);
-    } catch (err) {
-        res.status(500).json({ message: "Error fetching events" });
-    }
-});
+
 
 
 app.listen(process.env.PORT || 3000);

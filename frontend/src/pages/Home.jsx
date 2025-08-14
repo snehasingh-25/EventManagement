@@ -1,14 +1,33 @@
-import React from 'react'
-import Events from './Events'
+import React from "react";
+import Events from "./Events";
+import welcomeImage from "../assets/welcome2.jpg"; // replace with your image path
 
 const Home = () => {
   return (
     <div className="home-container">
-      <h1 className="page-title">Welcome to Event Manager</h1>
-      <p className="page-description">Create, manage, and explore events easily.</p>
-      {/* <Events/> */}
-    </div>
-  )
-}
+      <div className="home-hero">
+        <div className="home-welcome">
+          <h1 className="home-title">
+            Welcome to Gatherly
+          </h1>
+          <p className="home-desc">
+            Create, manage, and explore events easily.
+          </p>
+        </div>
 
-export default Home
+        {/* Right: Image */}
+        <div className="home-image">
+          <img
+            src={welcomeImage}
+            alt="Welcome"
+          />
+        </div>
+      </div>
+
+      {/* Events Section */}
+      <Events />
+    </div>
+  );
+};
+
+export default Home;

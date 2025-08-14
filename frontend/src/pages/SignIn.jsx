@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import CardWrapper from "../components/Card.jsx"; // import your reusable card
+import Typography from "@mui/material/Typography";
 
 const SignIn = () => {
   const { signin, loading } = useAuth();
@@ -18,27 +20,38 @@ const SignIn = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2>Sign In</h2>
-      <form onSubmit={handleSubmit} className="form">
-        <input
-          className="form-input"
-          type="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-        <input
-          className="form-input"
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-        <button className="form-button" type="submit" disabled={loading}>
-          {loading ? "Signing In..." : "Sign In"}
-        </button>
-      </form>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "50px",
+      }}
+    >
+      <CardWrapper>
+        <Typography variant="h5" sx={{ marginBottom: 2, textAlign: "center" }}>
+          Sign In
+        </Typography>
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: "flex", flexDirection: "column", gap: "15px" }}
+        >
+          <input
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+          />
+          <button type="submit" disabled={loading}>
+            {loading ? "Signing In..." : "Sign In"}
+          </button>
+        </form>
+      </CardWrapper>
     </div>
   );
 };

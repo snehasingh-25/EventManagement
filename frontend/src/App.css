@@ -1,149 +1,175 @@
-/* =========================
-   Theme Variables
-========================= */
 :root {
-  --bg: #f8f9fa;                 /* Page background */
-  --card: #ffffff;                /* Card background */
-  --text: #212529;                /* Primary text */
-  --text-muted: #6c757d;          /* Secondary text */
-  --accent: #4a90e2;              /* Accent buttons/links */
-  --accent-hover: #357abd;        /* Accent hover */
-  --danger: #dc3545;              /* Error/Delete */
-  --danger-hover: #bb2d3b;        /* Error/Delete hover */
-  --border: #dee2e6;              /* Borders */
-  --shadow: rgba(0, 0, 0, 0.05);  /* Card shadow */
+  --color-bg: #0d0d1a;             /* deep dark background */
+  --color-surface: #1a1a2e;        /* slightly lighter for cards */
+  --color-primary: #ffffff;        /* bright neon purple */
+  --color-primary-light: #9a76ff;  /* lighter purple for hover */
+  --color-accent: #00fff7;         /* neon cyan for highlights/buttons */
+  --color-text: #e0e0ff;           /* soft white text */
+  --color-text-muted: #a0a0b0;     /* muted gray for secondary text */
+  --color-border: #2c2c44;         /* dark border for cards/forms */
+  --color-shadow: 0 4px 20px rgba(0, 0, 0, 0.7); /* deep shadow */
+  --color-link-hover: #9a76ff;
+  --color-active: #00fff7;
 }
-
-/* =========================
-   Global Styles
-========================= */
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
+*{
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Body and general text */
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
 .header {
-  background-color: #1e1e2f;
-  padding: 1rem 2rem;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--color-shadow);
+  padding: 12px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  gap: 1.5rem;
+  gap: 28px;
 }
 
 .nav-link {
-  color: #ffffff;
+  color: var(--color-primary);
   text-decoration: none;
-  font-size: 1.1rem;
   font-weight: 500;
-  transition: color 0.3s ease;
+  font-size: 1.05rem;
+  padding: 7px 16px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
 }
 
 .nav-link:hover {
-  color: #ff9800;
+  background: var(--color-primary-light);
+  color: var(--color-bg);
 }
 
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
+.nav-link.active {
+  background: var(--color-accent);
+  color: var(--color-bg);
 }
 
-/* =========================
-   Card Styles
-========================= */
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 6px var(--shadow);
-  margin-bottom: 1.5rem;
+/* Cards */
+.MuiCard-root {
+  background: var(--color-surface) !important;
+  color: var(--color-text) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--color-shadow) !important;
+  border: 1px solid var(--color-border) !important;
 }
 
-/* =========================
-   Buttons
-========================= */
-.btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
+.MuiCardHeader-title,
+.MuiTypography-root {
+  color: var(--color-text) !important;
+}
+
+/* Inputs & Buttons */
+input, button,textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  padding: 10px 12px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  margin-bottom: 6px;
+  outline: none;
+  transition: border 0.2s, background 0.2s;
+}
+
+input:focus {
+  border-color: var(--color-primary);
+}
+
+button {
+  background: var(--color-accent);
+  color: var(--color-bg);
   border: none;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
+  font-weight: 600;
+  transition: background 0.2s;
 }
 
-.btn-accent {
-  background-color: var(--accent);
+button:disabled {
+  background: var(--color-primary-light);
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background: var(--color-primary);
   color: #fff;
 }
 
-.btn-accent:hover {
-  background-color: var(--accent-hover);
+/* Home Page Hero */
+.home-container {
+  padding: 32px 16px;
+  min-height: 100vh;
 }
 
-.btn-danger {
-  background-color: var(--danger);
-  color: #fff;
-}
-
-.btn-danger:hover {
-  background-color: var(--danger-hover);
-}
-
-/* =========================
-   Form Elements
-========================= */
-input, textarea, select {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25);
-}
-
-/* =========================
-   Text
-========================= */
-.text-muted {
-  color: var(--text-muted);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
-}
-
-/* =========================
-   Utility Classes
-========================= */
-.flex {
+.home-hero {
   display: flex;
   align-items: center;
+  justify-content:space-around;
+  gap: 5px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
 }
 
-.flex-between {
+.home-welcome {
+  flex: 1;
+  margin: 60px;
+}
+
+.home-title {
+  font-size: 2.7rem;
+  margin-bottom: 18px;
+  color: var(--color-primary);
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.home-desc {
+  font-size: 1.18rem;
+  color: var(--color-text-muted);
+}
+
+.home-image {
+  flex: 1;
+  text-align: right;
+  margin: 20px;
+}
+
+.home-image img {
+  max-width: 100%;
+  height: 600px;
+  border-radius: 18px;
+  box-shadow: var(--color-shadow);
+}
+
+.form-container {
+  padding: 32px 16px;
+  min-height: 100vh;
+}
+.create-event-form{
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  margin: 40px;
 }
 
-.mt-1 { margin-top: 0.5rem; }
-.mt-2 { margin-top: 1rem; }
-.mt-3 { margin-top: 1.5rem; }
+
