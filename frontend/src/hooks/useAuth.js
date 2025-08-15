@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { API } from "../api";
-const API_URL = "http://localhost:3000/api";
+const API_URL = "https://eventmanagement-60yw.onrender.com";
 
 export const useAuth = () => {
   const [loading, setLoading] = useState(false);
