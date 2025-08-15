@@ -43,7 +43,7 @@ app.post('/api/signup', async (req, res) => {
         const hashedpassword = await bcrypt.hash(password, 5)
         await UserModel.create({ name, email, password: hashedpassword });
         res.status(201).json({
-            message: "User SignedUp"
+            message: "Signed up successfully, please login"
         })
     }
     catch (err) {
@@ -72,7 +72,7 @@ app.post('/api/signin', async (req, res) => {
 
 app.get('/api/events', async (req, res) => {
     try {
-        const events = await EventsModel.find().populate('userId', 'name email -_id');
+        const events = await EventsModel.find().populate('userId', '_id name email');
         res.json(events);
     } catch (err) {
         res.status(500).json({ message: "Error fetching events" });
@@ -82,16 +82,16 @@ app.get('/api/events', async (req, res) => {
 app.use(authMiddleware);
 
 app.get('/api/profile', async (req, res) => {
-    const user = await UserModel.findById(req.userId)
-    const events = await EventsModel.find({
-        userId: req.userId
-    })
+    const user = await UserModel.findById(req.userId);
+    const events = await EventsModel.find({ userId: req.userId });
     res.json({
+        _id: user._id,
         username: user.name,
         email: user.email,
         events
-    })
-})
+    });
+});
+
 
 app.post('/api/createevent', async (req, res) => {
     const { title, description, image, date, time, venue } = req.body;
@@ -111,5 +111,56 @@ app.post('/api/createevent', async (req, res) => {
 
 
 
+app.post('/api/events/:id/register', async (req, res) => {
+  try {
+    const event = await EventsModel.findById(req.params.id);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    // Check if already registered
+    if (event.registeredUsers.includes(req.userId)) {
+      return res.status(400).json({ message: "Already registered" });
+    }
+
+    // Add user to registered list
+    event.registeredUsers.push(req.userId);
+    await event.save();
+
+    res.json({ message: "Registered successfully", event });
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+app.get('/api/events/:id', async (req, res) => {
+  try {
+    const event = await EventsModel.findById(req.params.id);
+    if (!event) return res.status(404).json({ message: "Event not found" });
+    res.json(event);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+app.delete('/api/events/:id', async (req, res) => {
+  const event = await EventsModel.findById(req.params.id);
+  if (!event) return res.status(404).json({ message: "Event not found" });
+  if (event.userId.toString() !== req.userId) {
+    return res.status(403).json({ message: "Not authorized" });
+  }
+  await event.deleteOne();
+  res.json({ message: "Event deleted" });
+});
+
+app.post('/api/events/:id/register', async (req, res) => {
+  const event = await EventsModel.findById(req.params.id);
+  if (!event) return res.status(404).json({ message: "Event not found" });
+  if (event.userId.toString() === req.userId) {
+    return res.status(400).json({ message: "You cannot register for your own event" });
+  }
+  // Save registration info here (depends on your schema)
+  res.json({ message: "Registered successfully" });
+});
 
 app.listen(process.env.PORT || 3000);

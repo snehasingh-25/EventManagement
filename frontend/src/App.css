@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&display=swap');
 :root {
-  --color-bg: #0d0d1a;             /* deep dark background */
-  --color-surface: #1a1a2e;        /* slightly lighter for cards */
+  --color-bg: #06101f;             /* deep dark background */
+  --color-surface: #00000a;        /* slightly lighter for cards */
   --color-primary: #ffffff;        /* bright neon purple */
   --color-primary-light: #9a76ff;  /* lighter purple for hover */
-  --color-accent: #00fff7;         /* neon cyan for highlights/buttons */
-  --color-text: #e0e0ff;           /* soft white text */
+  --color-accent: #9a76ff;         /* neon cyan for highlights/buttons */
+  --color-text: #efe4d4;           /* soft white text */
   --color-text-muted: #a0a0b0;     /* muted gray for secondary text */
   --color-border: #2c2c44;         /* dark border for cards/forms */
   --color-shadow: 0 4px 20px rgba(0, 0, 0, 0.7); /* deep shadow */
@@ -21,19 +22,25 @@
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-family: "Funnel Display";
+  font-weight: 400;
   margin: 0;
   padding: 0;
 }
 
 /* Header */
 .header {
+  height: 80px;
   width: 100%;
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
   box-shadow: var(--color-shadow);
+  border-radius: 20px;
   padding: 12px 32px;
-  position: sticky;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 0;
   z-index: 100;
 }
@@ -41,6 +48,7 @@ body {
 .nav {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 28px;
 }
 
@@ -48,7 +56,7 @@ body {
   color: var(--color-primary);
   text-decoration: none;
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 1.3rem;
   padding: 7px 16px;
   border-radius: 8px;
   transition: background 0.2s, color 0.2s;
@@ -66,21 +74,25 @@ body {
 
 /* Cards */
 .MuiCard-root {
+  min-height: 300px;
+  min-width: 300px;
   background: var(--color-surface) !important;
   color: var(--color-text) !important;
   border-radius: 16px !important;
   box-shadow: var(--color-shadow) !important;
   border: 1px solid var(--color-border) !important;
+  
 }
 
 .MuiCardHeader-title,
 .MuiTypography-root {
+  font-family: "Funnel Display" !important;
+  font-weight: 500 !important;
   color: var(--color-text) !important;
 }
 
 /* Inputs & Buttons */
 input, button,textarea {
-  font-family: inherit;
   font-size: 1rem;
   border-radius: 8px;
   border: 1px solid var(--color-border);
@@ -112,7 +124,7 @@ button:disabled {
 
 button:hover:not(:disabled) {
   background: var(--color-primary);
-  color: #fff;
+  color: #000000;
 }
 
 /* Home Page Hero */
@@ -139,8 +151,8 @@ button:hover:not(:disabled) {
   font-size: 2.7rem;
   margin-bottom: 18px;
   color: var(--color-primary);
-  font-weight: 700;
-  letter-spacing: -1px;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
 
 .home-desc {
@@ -152,6 +164,7 @@ button:hover:not(:disabled) {
   flex: 1;
   text-align: right;
   margin: 20px;
+  margin-top: 60px;
 }
 
 .home-image img {
@@ -173,3 +186,39 @@ button:hover:not(:disabled) {
 }
 
 
+.background-wrapper {
+  background-color: black;
+  position: relative;
+  min-height: 100vh; /* Always at least full screen */
+  width: 100%;
+}
+
+.background-wrapper::before {
+  content: "";
+  position: fixed; /* change from absolute to fixed for full-page coverage */
+  inset: 0;
+  z-index: 0;
+  background: #000;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(139, 92, 246, 0.2) 1px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.18) 1px, transparent 0),
+    radial-gradient(circle at 1px 1px, rgba(236, 72, 153, 0.15) 1px, transparent 0);
+  background-size: 20px 20px, 30px 30px, 25px 25px;
+  background-position: 0 0, 10px 10px, 15px 5px;
+}
+
+
+.foreground {
+  position: relative;
+  z-index: 10;
+}
+
+.events-container {
+  margin-top: 80px;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+
+}

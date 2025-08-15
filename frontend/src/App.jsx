@@ -7,8 +7,10 @@ import Events from './pages/Events';
 import CreateEvent from './pages/CreateEvent';
 import Layout from './components/Layout';
 import './App.css';
+import BackgroundWrapper from './components/BackgroundWrapper';
 const App = () => {
   return (
+    <BackgroundWrapper>
     <div>
       <BrowserRouter>
         <Routes>
@@ -16,11 +18,14 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/events" element={<Events />} />
             <Route path="/createevent" element={<CreateEvent />} />
+            <Route path="/createevent/:id" element={<CreateEvent />} /> 
           </Route>
         </Routes>
       </BrowserRouter>
     </div>
+    </BackgroundWrapper>
   )
 }
 

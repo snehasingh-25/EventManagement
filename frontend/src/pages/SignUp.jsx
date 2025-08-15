@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import CardWrapper from "../components/Card.jsx"; // import reusable card
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { signup, loading } = useAuth();
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await signup(form);
-    alert(res.message || "Signed up successfully");
+    alert(res.message || "Signed up successfully, please login");
+    navigate("/signin");
   };
 
   return (
@@ -18,7 +21,8 @@ const SignUp = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        marginTop: "50px",
+        alignItems: "center",
+        height: "90vh",
       }}
     >
       <CardWrapper>

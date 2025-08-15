@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import TodayIcon from '@mui/icons-material/Today';
 
 const Header = () => {
@@ -26,8 +26,7 @@ const Header = () => {
       <nav className="nav">
         {/* <TodayIcon/> */}
         <Link to="/" className="nav-link">Home</Link>
-        <Link to="/signup" className="nav-link">Sign Up</Link>
-        <Link to="/signin" className="nav-link">Sign In</Link>
+        <Link to="/events" className="nav-link">Events</Link>
         <Link
           to="/createevent"
           className="nav-link"
@@ -35,10 +34,25 @@ const Header = () => {
         >
           Create Event
         </Link>
+
+        {/* Show Sign Up / Sign In only if NOT logged in */}
+        {!isLoggedIn && (
+          <>
+            <Link to="/signup" className="nav-link">Sign Up</Link>
+            <Link to="/signin" className="nav-link">Sign In</Link>
+          </>
+        )}
+
+        {/* Show Logout only if logged in */}
         {isLoggedIn && (
           <button
             className="nav-link"
-            style={{ background: 'var(--color-accent)', color: '#fff', border: 'none', cursor: 'pointer' }}
+            style={{
+              background: 'var(--color-accent)',
+              color: '#fff',
+              border: 'none',
+              cursor: 'pointer'
+            }}
             onClick={handleLogout}
           >
             Logout
@@ -46,7 +60,7 @@ const Header = () => {
         )}
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

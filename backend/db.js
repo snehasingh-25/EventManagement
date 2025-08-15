@@ -3,19 +3,20 @@ const Schema = mongoose.Schema;
 const ObjectId = mongoose.ObjectId;
 
 const User = new Schema({
-    email: { 
-        type: String, 
-        unique: true, 
+    email: {
+        type: String,
+        unique: true,
         required: true,
         trim: true,
         lowercase: true,
-        match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email'] },
+        match: [/^\S+@\S+\.\S+$/, 'Please enter a valid email']
+    },
     password: {
         type: String,
         required: true,
         minlength: 6
     },
-    name:{
+    name: {
         type: String,
         required: true,
         trim: true
@@ -35,8 +36,8 @@ const Events = new Schema({
         trim: true
     },
     image: {
-    type: String,
-    trim: true 
+        type: String,
+        trim: true
     },
     date: {
         type: Date,
@@ -60,7 +61,11 @@ const Events = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    registeredUsers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
+    }]
 });
 
 const UserModel = mongoose.model('users', User);

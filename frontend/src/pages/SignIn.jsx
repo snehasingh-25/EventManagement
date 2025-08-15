@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import CardWrapper from "../components/Card.jsx"; // import your reusable card
+import CardWrapper from "../components/Card.jsx"; 
 import Typography from "@mui/material/Typography";
 
 const SignIn = () => {
@@ -24,11 +24,12 @@ const SignIn = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        marginTop: "50px",
+        alignItems: "center",
+        height: "90vh",
       }}
     >
       <CardWrapper>
-        <Typography variant="h5" sx={{ marginBottom: 2, textAlign: "center" }}>
+        <Typography variant="h5" sx={{ marginBottom: 2, textAlign: "center"}}>
           Sign In
         </Typography>
         <form

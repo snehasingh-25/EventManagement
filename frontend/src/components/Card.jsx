@@ -38,7 +38,7 @@ const CardWrapper = ({
   const handleExpandClick = () => setExpanded(!expanded);
 
   return (
-    <Card sx={{ maxWidth: 400, margin: 2 }}>
+    <Card sx={{ maxWidth: 400, margin: 2 , maxHeight: 600}}>
       {(title || avatar || subheader) && (
         <CardHeader avatar={avatar} title={title} subheader={subheader} />
       )}

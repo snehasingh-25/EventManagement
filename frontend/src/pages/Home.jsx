@@ -8,7 +8,7 @@ const Home = () => {
       <div className="home-hero">
         <div className="home-welcome">
           <h1 className="home-title">
-            Welcome to Gatherly
+            Welcome to <span style={{color:"#9a76ff"}}>GATHERLY</span>
           </h1>
           <p className="home-desc">
             Create, manage, and explore events easily.
